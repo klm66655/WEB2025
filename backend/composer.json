@@ -1,0 +1,17 @@
+{
+    "name": "hplaptop/movie-serie",
+    "require": {
+        "mikecao/flight": "^3.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hplaptop\\MovieSerie\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "klm66655",
+            "email": "kelim.selmanovic@stu.ibu.edu.ba"
+        }
+    ]
+}
