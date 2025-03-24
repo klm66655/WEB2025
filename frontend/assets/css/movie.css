@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+body {
+    background: linear-gradient(to right, #040525, #090f3d);
+    color: white; /* Bele boje za bolji kontrast */
+}
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+.movie-card img {
+    height: 250px; /* Fiksna visina slike */
+    object-fit: cover; /* Slika lepo popunjava okvir */
+}
+
+.movie-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}

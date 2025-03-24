@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">🎬 MovieDB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="movies.html">Movies</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card text-center p-4">
+                    <img src="../assets/images/anonymous.png" class="rounded-circle" width="120">
+                    <h3 id="username">John Doe</h3>
+                    <p id="email">johndoe@example.com</p>
+                    <p id="bio">Movie enthusiast, love action & sci-fi movies!</p>
+                    <button class="btn btn-primary">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Favorites Section -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h4>Favorite Movies</h4>
+                    <ul id="favorite-movies">
+                        <li>Interstellar (2014)</li>
+                        <li>Inception (2010)</li>
+                        <li>The Dark Knight (2008)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Reviews Section -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h4>Your Reviews</h4>
+                    <div class="review">
+                        <p><strong>Interstellar</strong> - "Amazing movie, great visuals!" ⭐⭐⭐⭐⭐</p>
+                    </div>
+                    <div class="review">
+                        <p><strong>Inception</strong> - "Mind-blowing experience!" ⭐⭐⭐⭐☆</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
