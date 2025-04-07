@@ -1,8 +1,12 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php'; // Podesi ispravan put do autoloadera
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once 'db.php'; 
+$db = new Database();
+Flight::set('db', $db->getConnection());
 
-Flight::route('/', function () {
-    echo 'FlightPHP radi!';
-});
+
+require_once __DIR__ . '/routes/userRoutes.php';
+require_once __DIR__ . '/routes/reviewRoutes.php';
+
 
 Flight::start();
