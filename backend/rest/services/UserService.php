@@ -17,8 +17,21 @@ class UserService {
     }
 
     public function createUser($data) {
-        return $this->dao->createUser($data);
+        
+        $existingUser = $this->dao->getUserByEmail($data['email']);
+    
+        if ($existingUser) {
+            Flight::halt(400, json_encode(["error" => "User with this email already exists."]));
+        }
+    
+        try {
+            return $this->dao->createUser($data);
+        } catch (PDOException $e) {
+            
+            throw $e;
+        }
     }
+    
 
     public function updateUser($id, $data) {
         return $this->dao->updateUser($id, $data);

@@ -60,5 +60,15 @@ class ReviewDao {
 
         return $stmt->execute();
     }
+
+
+    public function getReviewByUserAndMovie($userId, $movieId) {
+        $stmt = $this->connection->prepare("SELECT * FROM reviews WHERE user_id = :user_id AND movie_id = :movie_id");
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->bindParam(':movie_id', $movieId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 ?>

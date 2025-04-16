@@ -55,5 +55,14 @@ class MovieDao {
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+
+
+    public function genreExists($genreId) {
+        $stmt = $this->connection->prepare("SELECT COUNT(*) FROM genres WHERE id = :id");
+        $stmt->bindParam(':id', $genreId);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+    
 }
 ?>
