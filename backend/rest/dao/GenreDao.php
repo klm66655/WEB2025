@@ -45,5 +45,14 @@ class GenreDao {
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+
+
+    public function genreExistsByName($name) {
+        $stmt = $this->connection->prepare("SELECT COUNT(*) FROM genres WHERE name = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+    
 }
 ?>
