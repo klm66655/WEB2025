@@ -1,6 +1,4 @@
-
 <?php
-
 
 require_once __DIR__ . '/../services/UserService.php';
 
@@ -9,6 +7,7 @@ require_once __DIR__ . '/../services/UserService.php';
  *     path="/users",
  *     summary="Get all users",
  *     tags={"User"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of users"
@@ -16,6 +15,7 @@ require_once __DIR__ . '/../services/UserService.php';
  * )
  */
 Flight::route('GET /users', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new UserService($conn);
     Flight::json($service->getAllUsers());
@@ -26,6 +26,7 @@ Flight::route('GET /users', function() {
  *     path="/users/{id}",
  *     summary="Get user by ID",
  *     tags={"User"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -39,6 +40,7 @@ Flight::route('GET /users', function() {
  * )
  */
 Flight::route('GET /users/@id', function($id) {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new UserService($conn);
     Flight::json($service->getUserById($id));
@@ -49,6 +51,7 @@ Flight::route('GET /users/@id', function($id) {
  *     path="/users",
  *     summary="Create a new user",
  *     tags={"User"},
+ *     security={{"ApiKey":{}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -65,6 +68,7 @@ Flight::route('GET /users/@id', function($id) {
  * )
  */
 Flight::route('POST /users', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new UserService($conn);
     $data = Flight::request()->data->getData();
@@ -77,6 +81,7 @@ Flight::route('POST /users', function() {
  *     path="/users/{id}",
  *     summary="Update a user",
  *     tags={"User"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -98,6 +103,7 @@ Flight::route('POST /users', function() {
  * )
  */
 Flight::route('PUT /users/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new UserService($conn);
     $data = Flight::request()->data->getData();
@@ -110,6 +116,7 @@ Flight::route('PUT /users/@id', function($id) {
  *     path="/users/{id}",
  *     summary="Delete a user",
  *     tags={"User"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -123,6 +130,7 @@ Flight::route('PUT /users/@id', function($id) {
  * )
  */
 Flight::route('DELETE /users/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new UserService($conn);
     $service->deleteUser($id);

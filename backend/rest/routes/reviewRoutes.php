@@ -9,6 +9,7 @@ require_once __DIR__ . '/../services/ReviewService.php';
  *     path="/reviews",
  *     summary="Get all reviews",
  *     tags={"Reviews"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of reviews"
@@ -16,6 +17,7 @@ require_once __DIR__ . '/../services/ReviewService.php';
  * )
  */
 Flight::route('GET /reviews', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new ReviewService($conn);
     Flight::json($service->getAllReviews());
@@ -26,6 +28,7 @@ Flight::route('GET /reviews', function() {
  *     path="/reviews/{id}",
  *     summary="Get a review by ID",
  *     tags={"Reviews"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -43,6 +46,7 @@ Flight::route('GET /reviews', function() {
  * )
  */
 Flight::route('GET /reviews/@id', function($id) {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new ReviewService($conn);
     Flight::json($service->getReviewById($id));
@@ -53,6 +57,7 @@ Flight::route('GET /reviews/@id', function($id) {
  *     path="/reviews",
  *     summary="Create a new review",
  *     tags={"Reviews"},
+ *     security={{"ApiKey":{}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -74,6 +79,7 @@ Flight::route('GET /reviews/@id', function($id) {
  * )
  */
 Flight::route('POST /reviews', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new ReviewService($conn);
     $data = Flight::request()->data->getData();
@@ -92,6 +98,7 @@ Flight::route('POST /reviews', function() {
  *     path="/reviews/{id}",
  *     summary="Update a review",
  *     tags={"Reviews"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -112,6 +119,7 @@ Flight::route('POST /reviews', function() {
  * )
  */
 Flight::route('PUT /reviews/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new ReviewService($conn);
     $data = Flight::request()->data->getData();
@@ -124,6 +132,7 @@ Flight::route('PUT /reviews/@id', function($id) {
  *     path="/reviews/{id}",
  *     summary="Delete a review",
  *     tags={"Reviews"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -137,6 +146,7 @@ Flight::route('PUT /reviews/@id', function($id) {
  * )
  */
 Flight::route('DELETE /reviews/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new ReviewService($conn);
     $service->deleteReview($id);

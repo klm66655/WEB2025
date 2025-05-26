@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie/Series System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/movie-serie/frontend/assets/css/dashboard.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">🎬 MovieDB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="movies.html">Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <header class="bg-dark text-white text-center py-5">
+        <div class="container">
+            <h1>Welcome to MovieDB</h1>
+            <p>Explore and review your favorite movies and series</p>
+            <a href="movies.html" class="btn btn-primary">Browse Movies</a>
+        </div>
+    </header>
+    
+    <!-- Movie Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Latest Movies & Series</h2>
+        <div class="row">
+            <!-- Movie Card Example -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../assets/images/deadpool2.png" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">Deadpool</h5>
+                        <p class="card-text">Short description of the movie.</p>
+                        <a href="movie.html" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../assets/images/dumb.png" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">Dumb and Dumber</h5>
+                        <p class="card-text">Short description of the movie.</p>
+                        <a href="movie.html" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="../assets/images/greemile.png" class="card-img-top" alt="Movie Poster">
+                    <div class="card-body">
+                        <h5 class="card-title">The Green Mile</h5>
+                        <p class="card-text">Short description of the movie.</p>
+                        <a href="movie.html" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 MovieDB | All Rights Reserved</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/movie-serie/frontend/js/app.js"></script>
+
+</body>
+</html>
