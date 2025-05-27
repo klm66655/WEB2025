@@ -1,0 +1,49 @@
+/* Postavlja sliku u pozadinu headera */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+header {
+    background: url('../images/movie.png') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    min-height: 75vh;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 100px 0;
+    color: white; /* Održava tekst bele boje */
+}
+
+/* Dodaje tamni providni sloj preko slike */
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Crni sloj sa 50% providnosti */
+}
+
+/* Održava sadržaj iznad providnog sloja */
+header .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Stilizovanje dugmeta */
+header .btn {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+header .btn:hover {
+    background-color: #0056b3;
+}

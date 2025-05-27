@@ -8,6 +8,7 @@ require_once __DIR__ . '/../services/FavoriteMovieService.php';
  *     path="/favorites",
  *     summary="Get all favorite movies",
  *     tags={"Favorite Movies"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of all favorite movie entries"
@@ -15,6 +16,7 @@ require_once __DIR__ . '/../services/FavoriteMovieService.php';
  * )
  */
 Flight::route('GET /favorites', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new FavoriteMovieService($conn);
     Flight::json($service->getAllFavorites());
@@ -25,6 +27,7 @@ Flight::route('GET /favorites', function() {
  *     path="/favorites/user/{user_id}",
  *     summary="Get favorite movies by user ID",
  *     tags={"Favorite Movies"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="user_id",
  *         in="path",
@@ -42,6 +45,7 @@ Flight::route('GET /favorites', function() {
  * )
  */
 Flight::route('GET /favorites/user/@user_id', function($user_id) {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new FavoriteMovieService($conn);
     Flight::json($service->getFavoritesByUserId($user_id));
@@ -52,6 +56,7 @@ Flight::route('GET /favorites/user/@user_id', function($user_id) {
  *     path="/favorites",
  *     summary="Add a movie to favorites",
  *     tags={"Favorite Movies"},
+ *     security={{"ApiKey":{}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -71,6 +76,7 @@ Flight::route('GET /favorites/user/@user_id', function($user_id) {
  * )
  */
 Flight::route('POST /favorites', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new FavoriteMovieService($conn);
     $data = Flight::request()->data->getData();
@@ -83,6 +89,7 @@ Flight::route('POST /favorites', function() {
  *     path="/favorites/{user_id}/{movie_id}",
  *     summary="Remove a movie from favorites",
  *     tags={"Favorite Movies"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="user_id",
  *         in="path",
@@ -102,6 +109,7 @@ Flight::route('POST /favorites', function() {
  * )
  */
 Flight::route('DELETE /favorites/@user_id/@movie_id', function($user_id, $movie_id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new FavoriteMovieService($conn);
     $service->deleteFavorite($user_id, $movie_id);

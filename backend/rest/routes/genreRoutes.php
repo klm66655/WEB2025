@@ -8,6 +8,7 @@ require_once __DIR__ . '/../services/GenreService.php';
  *     path="/genres",
  *     summary="Get all genres",
  *     tags={"Genres"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of genres"
@@ -15,6 +16,7 @@ require_once __DIR__ . '/../services/GenreService.php';
  * )
  */
 Flight::route('GET /genres', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new GenreService($conn);
     Flight::json($service->getAllGenres());
@@ -25,6 +27,7 @@ Flight::route('GET /genres', function() {
  *     path="/genres/{id}",
  *     summary="Get a genre by ID",
  *     tags={"Genres"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -42,6 +45,7 @@ Flight::route('GET /genres', function() {
  * )
  */
 Flight::route('GET /genres/@id', function($id) {
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::USER]);
     $conn = Flight::get('db');
     $service = new GenreService($conn);
     Flight::json($service->getGenreById($id));
@@ -52,6 +56,7 @@ Flight::route('GET /genres/@id', function($id) {
  *     path="/genres",
  *     summary="Create a new genre",
  *     tags={"Genres"},
+ *     security={{"ApiKey":{}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -70,6 +75,7 @@ Flight::route('GET /genres/@id', function($id) {
  * )
  */
 Flight::route('POST /genres', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new GenreService($conn);
     $data = Flight::request()->data->getData();
@@ -88,6 +94,7 @@ Flight::route('POST /genres', function() {
  *     path="/genres/{id}",
  *     summary="Update a genre",
  *     tags={"Genres"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -107,6 +114,7 @@ Flight::route('POST /genres', function() {
  * )
  */
 Flight::route('PUT /genres/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new GenreService($conn);
     $data = Flight::request()->data->getData();
@@ -119,6 +127,7 @@ Flight::route('PUT /genres/@id', function($id) {
  *     path="/genres/{id}",
  *     summary="Delete a genre",
  *     tags={"Genres"},
+ *     security={{"ApiKey":{}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -132,6 +141,7 @@ Flight::route('PUT /genres/@id', function($id) {
  * )
  */
 Flight::route('DELETE /genres/@id', function($id) {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $conn = Flight::get('db');
     $service = new GenreService($conn);
     $service->deleteGenre($id);

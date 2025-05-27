@@ -28,6 +28,37 @@ document.addEventListener("DOMContentLoaded", function () {
         return false;
     };
 
+    // 🚀 LOGIN FUNKCIONALNOST
+    const loginSubmitForm = document.querySelector("form.login");
 
-    
+    loginSubmitForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const email = loginSubmitForm.querySelector('input[name="email"]').value;
+        const password = loginSubmitForm.querySelector('input[name="password"]').value;
+
+        try {
+            const response = await fetch("http://localhost/movie-serie/backend/rest/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // ✅ Sačuvaj token i korisnika
+                localStorage.setItem("token", result.data.token);
+                localStorage.setItem("user", JSON.stringify(result.data));
+
+                alert("Login uspešan!");
+                window.location.href = "/movie-serie/frontend/pages/dashboard.html"; 
+            } else {
+                alert("Greška: " + result.error);
+            }
+        } catch (err) {
+            console.error("Greška pri loginu:", err);
+            alert("Došlo je do greške. Pokušaj ponovo.");
+        }
     });
+});

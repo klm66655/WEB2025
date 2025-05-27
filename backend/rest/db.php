@@ -1,31 +1,26 @@
 <?php
+require_once 'config.php';
+
 class Database {
-    private $host = 'localhost';
-    private $dbName = 'movie_app'; 
-    private $dbPort = 3306;
-    private $username = 'root';
-    private $password = '';
-    private $connection;
+    private static $connection = null;
 
-    public function __construct() {
-        try {
-            $this->connection = new PDO(
-                "mysql:host={$this->host};dbname={$this->dbName};port={$this->dbPort}",
-                $this->username,
-                $this->password,
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-                ]
-            );
-        } catch (PDOException $e) {
-            throw $e;
+    public static function getConnection() {
+        if (self::$connection === null) {
+            try {
+                self::$connection = new PDO(
+                    "mysql:host=" . Config::DB_HOST() . ";dbname=" . Config::DB_NAME(),
+                    Config::DB_USER(),
+                    Config::DB_PASSWORD(),
+                    [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                    ]
+                );
+            } catch (PDOException $e) {
+                die("Connection failed: " . $e->getMessage());
+            }
         }
-    }
-
-    
-    public function getConnection() {
-        return $this->connection;
+        return self::$connection;
     }
 }
 ?>
